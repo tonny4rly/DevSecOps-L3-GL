@@ -42,12 +42,9 @@ pipeline {
 
         stage('Stage 3: Container Scanning (Trivy)') {
             steps {
-                script {
-                    // Scan de l'image locale. 
-                    // On retire le "+ true" pour que le build échoue REELLEMENT en cas de faille critique.
-                    sh "trivy image --severity HIGH,CRITICAL ${IMAGE_NAME}:latest"
-                }
-            }
+                // On monte le socket Docker pour que Trivy puisse scanner l'image 'secureapi'
+                sh "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image secureapi"
+    }
         }
 
         stage('Stage 4: Push to Nexus') {
