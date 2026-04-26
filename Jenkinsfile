@@ -6,7 +6,7 @@ pipeline {
         SONAR_URL = 'http://sonarqube:9000'
         
         // Configuration Nexus / Docker
-        NEXUS_URL = 'localhost:8082'
+        NEXUS_URL = 'nexus:8082'
         IMAGE_NAME = 'secureapi'
         IMAGE_TAG = "${env.BUILD_NUMBER}"
         REGISTRY_CREDS = 'NEXUS_CREDS'
