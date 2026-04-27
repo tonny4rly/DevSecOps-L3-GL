@@ -6,7 +6,16 @@ services:
       - "9000:9000"
     networks:
       - jenkins-net
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
 
 networks:
   jenkins-net:
-    external: true # On utilise le même réseau que Jenkins
+    external: true #utilise le même réseau que Jenkins
+
+volumes:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
