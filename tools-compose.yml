@@ -7,21 +7,6 @@ services:
     networks:
       - jenkins-net
 
-  nexus:
-    image: sonatype/nexus3
-    container_name: nexus
-    ports:
-      - "8081:8081"
-      - "8082:8082"
-    environment:
-      - INSTALL4J_ADD_VM_PARAMS=-Xms1200m -Xmx1200m -XX:MaxDirectMemorySize=1024m
-    deploy:
-      resources:
-        limits:
-          memory: 3G
-    networks:
-      - jenkins-net
-
 networks:
   jenkins-net:
     external: true # On utilise le même réseau que Jenkins
