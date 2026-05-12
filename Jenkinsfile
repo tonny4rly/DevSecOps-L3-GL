@@ -37,7 +37,8 @@ pipeline {
                 sonarsource/sonar-scanner-cli \
                 -Dsonar.projectKey=secureapi \
                 -Dsonar.sources=. \
-                -Dsonar.host.url=${SONAR_URL}
+                -Dsonar.host.url=${SONAR_URL} \
+                -Dsonar.token=sqp_160b0faf79e859486cbfd36622c061737e50e2c9
                 """
             }
         }
