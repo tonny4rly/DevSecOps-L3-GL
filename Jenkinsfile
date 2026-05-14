@@ -73,7 +73,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Construction de l'image Docker à partir du Dockerfile
-                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+                //sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+                sh "docker build --platform linux/amd64 -t ${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG} ."
             }
         }
 

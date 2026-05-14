@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestion des Étudiants - SecureAPI</title>
+</head>
+
+<script>
+    fetch('/api/students')
+        .then(response => response.json())
+        .then(data => {
+            const list = document.getElementById('student-list');
+            list.innerHTML = '<ul>' + data.map(s => 
+                `<li>${s.name} - Note: ${s.grade} (${s.status})</li>`
+            ).join('') + '</ul>';
+        });
+</script>
+
+<body>
+    <h1>Liste des Étudiants</h1>
+    <div id="student-list">Chargement...</div>
+    <button onclick="alert('Fonctionnalité bientôt disponible !')">Ajouter un étudiant</button>
+</body>
+</html>
