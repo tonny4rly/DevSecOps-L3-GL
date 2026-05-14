@@ -106,7 +106,7 @@ pipeline {
         stage('Deploy to Render') {
             steps {
                 // Remplace 'TON_URL_DE_HOOK' par l'URL trouvée dans Render > Settings > Deploy Hook
-                sh "curl -X POST 'https://api.render.com/deploy/srv-xxxxxxxxxxxxxxx?key=yyyyyyyyyyyy'"
+                sh "curl -X POST 'https://api.render.com/deploy/srv-d832i5navr4c73esqbug?key=tgyE7VDIzrs'"
             }
         }
     }
