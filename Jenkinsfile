@@ -90,13 +90,23 @@ pipeline {
             }
         }
 
-        stage('Push to Nexus') {
+        stage('Push to DockerHub') {
             steps {
-                echo "Prochaine étape : Configuration du registre privé sur le port 8081/8082"
-                /* sh "docker login -u admin -p password localhost:8082"
-                sh "docker tag ${IMAGE_NAME}:${IMAGE_TAG} localhost:8082/${IMAGE_NAME}:${IMAGE_TAG}"
-                sh "docker push localhost:8082/${IMAGE_NAME}:${IMAGE_TAG}"
-                */
+                withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDS_ID}", passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER_ENV')]) {
+                    // On tente de se connecter jusqu'à 3 fois en cas de timeout réseau
+                    retry(3) {
+                        sh "echo \$DOCKER_PASS | docker login -u \$DOCKER_USER_ENV --password-stdin"
+                    }
+                    sh "docker push ${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG}"
+                }
+            }
+        }
+
+        // AJOUTE CETTE ÉTAPE ICI POUR L'AUTOMATISATION TOTALE
+        stage('Deploy to Render') {
+            steps {
+                // Remplace 'TON_URL_DE_HOOK' par l'URL trouvée dans Render > Settings > Deploy Hook
+                sh "curl -X POST 'https://api.render.com/deploy/srv-xxxxxxxxxxxxxxx?key=yyyyyyyyyyyy'"
             }
         }
     }
