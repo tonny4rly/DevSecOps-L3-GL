@@ -7,7 +7,8 @@ describe("GET /", () => {
         const res = await request(app).get("/");
 
         expect(res.statusCode).toBe(200);
-        expect(res.text).toBe("RAY is the best!");
+        expect(res.text).toContain("Liste des Étudiants");
+        //expect(res.text).toBe("RAY is the best!");
         //expect(1 + 1).toBe(3); //C'est un faux test pour vérifier que Jest fonctionne correctement
     });
 });
