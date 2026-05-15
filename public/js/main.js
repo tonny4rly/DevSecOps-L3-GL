@@ -1,4 +1,4 @@
-// Fonction pour charger et afficher la liste des étudiants
+// afficher la liste des étudiants
 function loadStudents() {
     fetch('/api/students')
         .then(res => res.json())
@@ -19,7 +19,7 @@ function loadStudents() {
         .catch(err => console.error("Erreur chargement:", err));
 }
 
-// Fonction pour ajouter un étudiant (CREATE)
+// ajouter
 function addStudent() {
     const name = document.getElementById('newName').value;
     const grade = document.getElementById('newGrade').value;
@@ -38,7 +38,7 @@ function addStudent() {
     });
 }
 
-// Fonction pour supprimer un étudiant (DELETE)
+// supprimer
 function deleteStudent(id) {
     if (!confirm("Supprimer cet étudiant ?")) return;
 
@@ -48,7 +48,7 @@ function deleteStudent(id) {
     .then(() => loadStudents());
 }
 
-// Fonction pour l'Orientation (Fusion de ton idée)
+// Fonction pour l'Orientation
 function getOrientation() {
     const grade = document.getElementById('userGrade').value;
     if (!grade) return;

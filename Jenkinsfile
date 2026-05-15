@@ -2,17 +2,18 @@ pipeline {
     agent any
 
     environment {
-        // Nom de l'image Docker finale
+        DOCKER_USER = "tonny4rly"
+        // image Docker
         IMAGE_NAME = "secureapi"
         IMAGE_TAG = "latest"
         
-        // URL de SonarQube : 
-        // Utilise l'IP interne du conteneur si Jenkins et Sonar sont sur le même réseau Docker
-        // Ou 'host.docker.internal' si tu es sur Docker Desktop Mac/Windows
+        // URL de SonarQube : docker inspect
+        // Ou 'host.docker.internal' si c'est sur Docker Desktop Mac/Windows
         SONAR_URL = "http://172.19.0.3:9000" 
         
         // Token d'authentification généré dans SonarQube
         SONAR_TOKEN = "sqp_160b0faf79e859486cbfd36622c061737e50e2c9"
+        DOCKER_CREDS_ID = "dockerhub-creds"
     }
 
     stages {
@@ -25,7 +26,6 @@ pipeline {
 
         stage('Install') {
             steps {
-                // Installation des dépendances Node.js dans un conteneur éphémère
                 sh "docker run --rm -v \$(pwd):/app -w /app node:18-alpine npm install"
             }
         }
@@ -93,7 +93,6 @@ pipeline {
         stage('Push to DockerHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDS_ID}", passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER_ENV')]) {
-                    // On tente de se connecter jusqu'à 3 fois en cas de timeout réseau
                     retry(3) {
                         sh "echo \$DOCKER_PASS | docker login -u \$DOCKER_USER_ENV --password-stdin"
                     }
@@ -102,10 +101,8 @@ pipeline {
             }
         }
 
-        // AJOUTE CETTE ÉTAPE ICI POUR L'AUTOMATISATION TOTALE
         stage('Deploy to Render') {
             steps {
-                // Remplace 'TON_URL_DE_HOOK' par l'URL trouvée dans Render > Settings > Deploy Hook
                 sh "curl -X POST 'https://api.render.com/deploy/srv-d832i5navr4c73esqbug?key=tgyE7VDIzrs'"
             }
         }
