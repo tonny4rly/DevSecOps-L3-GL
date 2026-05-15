@@ -1,23 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Gestion des Étudiants - SecureAPI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClasSmart - L'éducation pilotée par la donnée</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
-<script>
-    fetch('/api/students')
-        .then(response => response.json())
-        .then(data => {
-            const list = document.getElementById('student-list');
-            list.innerHTML = '<ul>' + data.map(s => 
-                `<li>${s.name} - Note: ${s.grade} (${s.status})</li>`
-            ).join('') + '</ul>';
-        });
-</script>
-
 <body>
-    <h1>Liste des Étudiants</h1>
-    <div id="student-list">Chargement...</div>
-    <button onclick="alert('Fonctionnalité bientôt disponible !')">Ajouter un étudiant</button>
+
+    <header>
+        <div class="hero">
+            <h1>ClasSmart<span>.</span></h1>
+            <p class="slogan">L'excellence académique au service de votre avenir.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <div class="card-header">
+                <h2>🎓 Gestion des Étudiants</h2>
+                <p>Suivi en temps réel de la base académique</p>
+            </div>
+            <div id="student-list">Chargement des données...</div>
+            
+            <div class="add-form">
+                <h3>Ajouter un étudiant</h3>
+                <div class="input-group">
+                    <input type="text" id="newName" placeholder="Nom complet">
+                    <input type="number" id="newGrade" placeholder="Note / 20">
+                    <button class="btn-primary" onclick="addStudent()">Enregistrer</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="card stripe-style">
+            <div class="card-header">
+                <h2>🔍 Orientation Intelligente</h2>
+                <p>Algorithme prédictif basé sur les performances</p>
+            </div>
+            <div class="orient-box">
+                <input type="number" id="userGrade" placeholder="Entrez une note">
+                <button class="btn-secondary" onclick="getOrientation()">Analyser le profil</button>
+                <div id="orientationResult" class="result-badge"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ClasSmart Cloud Infrastructure. Propulsé par DevSecOps.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>

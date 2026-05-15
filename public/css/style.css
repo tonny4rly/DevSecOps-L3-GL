@@ -1,0 +1,237 @@
+:root {
+    --primary: #635bff; /* Bleu Stripe */
+    --secondary: #0a2540;
+    --accent: #00d4ff;
+    --bg: #f6f9fc;
+    --text: #425466;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Raleway", sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* Header & Hero */
+header {
+    background: var(--white);
+    padding: 80px 20px;
+    text-align: center;
+    background: radial-gradient(circle at top right, #fff, #f6f9fc);
+}
+
+.hero h1 {
+    font-weight: 800;
+    font-size: 3.5rem;
+    color: var(--secondary);
+    margin-bottom: 10px;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.slogan {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--text);
+}
+
+/* Container */
+.container {
+    max-width: 1000px;
+    margin: -50px auto 50px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .container { grid-template-columns: 1fr; }
+}
+
+/* Cards */
+.card {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header h2 {
+    color: var(--secondary);
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.card-header p {
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* List Style */
+ul { list-style: none; }
+li {
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f4f8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+/* Inputs & Buttons */
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #e6ebf1;
+    border-radius: 4px;
+    font-family: inherit;
+    transition: border 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+button {
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    padding: 12px 20px;
+    width: 100%;
+}
+
+.btn-primary:hover { background: #4d45e5; }
+
+.btn-secondary {
+    background: var(--secondary);
+    color: white;
+    padding: 12px 20px;
+    width: 100%;
+}
+
+.delete-btn {
+    background: transparent;
+    color: #ed5f74;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+.delete-btn:hover { 
+    color: #cf4a5c;
+    background: rgba(237, 95, 116, 0.1);
+}
+
+/* Orientation Result */
+.result-badge {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f6f9fc;
+    border-left: 4px solid var(--accent);
+    font-weight: 600;
+    min-height: 50px;
+}
+
+footer {
+    text-align: center;
+    padding: 40px;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* Responsive adjustments */
+
+/* 1. Ajustement de la grille principale */
+.container {
+    max-width: 1100px;
+    margin: -50px auto 50px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr; /* Un peu plus large pour la liste */
+    gap: 30px;
+}
+
+/* 2. MEDIA QUERIES - Le coeur du Responsive */
+
+/* TABLETTES (Moins de 992px) */
+@media (max-width: 992px) {
+    .container {
+        grid-template-columns: 1fr; /* On passe sur une seule colonne */
+        margin-top: 20px;
+    }
+    
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+}
+
+/* MOBILES (Moins de 576px) */
+@media (max-width: 576px) {
+    header {
+        padding: 40px 15px;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .slogan {
+        font-size: 1rem;
+    }
+
+    .card {
+        padding: 20px; /* Moins d'espace interne sur petit écran */
+    }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    li {
+        font-size: 0.9rem;
+        flex-direction: column; /* Nom et bouton l'un sur l'autre si besoin */
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .delete-btn {
+        align-self: flex-end; /* Bouton supprimer à droite */
+    }
+}
+
+/* 3. STYLES ADDITIONNELS POUR L'UX MOBILE */
+input, button {
+    font-size: 16px; /* Évite le zoom automatique sur iPhone lors de la saisie */
+}
+
+.card-header h2 {
+    font-size: 1.2rem;
+}
